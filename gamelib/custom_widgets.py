@@ -1,4 +1,5 @@
 """Custom widgets for Suspened Sentence"""
+from __future__ import division
 
 import pygame
 from pyntnclick.widgets.text import WrappedTextLabel
@@ -19,5 +20,5 @@ class JimLabel(WrappedTextLabel):
     def prepare(self):
         # Centre the widget
         super(JimLabel, self).prepare()
-        self.rect.center = (self.gd.constants.screen[0] / 2,
-                self.gd.constants.screen[1] / 2)
+        self.rect.center = (self.gd.constants.screen[0] // 2,
+                self.gd.constants.screen[1] // 2)

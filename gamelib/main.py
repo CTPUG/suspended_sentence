@@ -1,9 +1,9 @@
-import scenes
+from . import scenes
 
-from constants import SSConstants
-from menu import SSMenuScreen
-from endscreen import EndScreen
-from ss_state import SSState
+from .constants import SSConstants
+from .menu import SSMenuScreen
+from .endscreen import EndScreen
+from .ss_state import SSState
 
 from pyntnclick.main import GameDescription
 

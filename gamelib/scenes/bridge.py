@@ -2,12 +2,12 @@
 
 import random
 
-from pygame.colordict import THECOLORS
 from pygame.color import Color
 from pygame.rect import Rect
 
 from pyntnclick.i18n import _
-from pyntnclick.utils import render_text
+from pyntnclick.utils import (render_text, lookup_debug_color,
+                              make_reversible_list)
 from pyntnclick.cursor import CursorSprite
 from pyntnclick.state import Scene, Item, Thing, Result
 from pyntnclick.scenewidgets import (
@@ -255,8 +255,11 @@ class StarField(Thing):
     INTERACTS = {
             #'stars' : InteractImage(190, 145, 'stars_3.png'),
             'stars': InteractAnimated(190, 145,
-                                      ['stars_%d.png' % (i + 1) for i
-                                       in range(3) + range(1, 0, -1)], 30),
+                                      make_reversible_list(
+                                          ['stars_%d.png' % (i + 1) for i
+                                           in range(3)]
+                                      ),
+                                      30),
             }
 
     INITIAL = 'stars'
@@ -460,7 +463,7 @@ class DestNavPageLine(Thing):
         super(DestNavPageLine, self).__init__()
         self.name = 'bridge_comp.nav_line%s' % number
         # set debugging higlight color for when DEBUG is on.
-        self._interact_hilight_color = Color(THECOLORS.keys()[number])
+        self._interact_hilight_color = lookup_debug_color(number)
         r = Rect(rect)
         # We dynamically generate the interact rect here.
         self.interacts = {}
@@ -604,12 +607,12 @@ class BridgeCompDetail(Scene):
         self._alert = self.get_image(self.FOLDER, self.ALERT_BASE)
         self._alert_messages = {}
         self._nav_messages = {}
-        for key, text in self.ALERTS.iteritems():
+        for key, text in self.ALERTS.items():
             self._alert_messages[key] = render_text(text,
                     'DejaVuSans-Bold.ttf', 18, 'orange', (0, 0, 0, 0),
                     self.resource, (600, 25), False)
         self._nav_background = self.get_image(self.FOLDER, self.NAVIGATION)
-        #for key, name in self.NAVIGATION.iteritems():
+        #for key, name in self.NAVIGATION.items():
         #    self._nav_messages[key] = self.get_image(self.FOLDER, name)
         self._nav_lines = []
         self._nav_lines.append(DestNavPageLine(1, (12, 99, 610, 25), False,
@@ -654,7 +657,7 @@ class BridgeCompDetail(Scene):
     def _clear_navigation(self):
         "Remove navigation things if necessary"
         for thing in self._nav_lines:
-            if thing.name in self.things.keys():
+            if thing.name in self.things:
                 # Much fiddling to do the right thing when we reinsert it
                 del self.things[thing.name]
                 thing.scene = None

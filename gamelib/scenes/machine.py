@@ -3,6 +3,7 @@
 from pyntnclick.i18n import _
 from pyntnclick.state import Scene, Item, Thing, Result
 from pyntnclick.cursor import CursorSprite
+from pyntnclick.utils import make_reversible_list
 from pyntnclick.scenewidgets import (
     InteractNoImage, InteractImage, InteractAnimated, GenericDescThing,
     TakeableThing)
@@ -209,8 +210,11 @@ class LaserWelderPowerLights(Thing):
     NAME = "machine.welder.lights"
 
     INTERACTS = {
-        "lights": InteractAnimated(199, 273, ["power_lights_%d.png" % i for i
-                                              in range(8) + range(6, 0, -1)],
+        "lights": InteractAnimated(199, 273,
+                                   make_reversible_list(
+                                       ["power_lights_%d.png" % i
+                                        for i in range(8)]
+                                   ),
                                    10),
     }
 

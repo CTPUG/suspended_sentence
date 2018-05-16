@@ -2,7 +2,7 @@
 
 from pyntnclick.i18n import _
 from pyntnclick.cursor import CursorSprite
-from pyntnclick.utils import render_text
+from pyntnclick.utils import render_text, make_reversible_list
 from pyntnclick.state import Scene, Item, Thing, Result
 from pyntnclick.scenewidgets import (
     InteractNoImage, InteractRectUnion, InteractImage, InteractAnimated,
@@ -27,8 +27,8 @@ class Engine(Scene):
         self.add_thing(CanOpenerThing())
         self.add_thing(SuperconductorSocket())
         self.add_thing(PowerLines())
-        self.add_thing(CryoContainers())
         self.add_thing(CryoContainerReceptacle())
+        self.add_thing(CryoContainers())
         self.add_thing(CoolingPipes())
         self.add_thing(ArrowsTopLeft())
         self.add_thing(ArrowsBottomLeft())
@@ -468,8 +468,7 @@ class Stars(Thing):
 
     INTERACTS = {
         'stars': InteractAnimated(287, 455,
-            ['stars_%d.png' % (i + 1) for i
-             in range(5) + range(3, 0, -1)],
+            make_reversible_list(['stars_%d.png' % (i + 1) for i in range(5)]),
             30,
         ),
     }
@@ -560,7 +559,7 @@ class EngineCompDetail(Scene):
         self._alert_messages = {}
         self._alert_header = render_text(_("Alerts"), 'DejaVuSans.ttf',
                 27, 'darkred', (0, 0, 0, 0), self.resource, (120, 33), False)
-        for key, msg in self.ALERTS.iteritems():
+        for key, msg in self.ALERTS.items():
             self._alert_messages[key] = render_text(msg, 'DejaVuSans-Bold.ttf',
                     30, 'darkred', (0, 0, 0, 0), self.resource, (480, 33),
                     False)
