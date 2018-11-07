@@ -72,10 +72,9 @@ PLATFORMS = [
 ]
 
 INSTALL_REQUIRES = [
+    'pyntnclick'
 ]
 
 # Install these manually
 NON_EGG_REQUIREMENTS = [
-    'setuptools',
-    'pygame',
 ]
