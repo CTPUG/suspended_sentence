@@ -27,7 +27,7 @@ double-click it to launch the game.
 Unix:
 
 If you have the Unix .tgz file, make sure you have Python and pygame
-installed. The extract the tar file and run "python run_game.py" from
+installed. The extract the tar file and run `python run_game.py` from
 inside the extracted folder.
 
 Mac OS X:
@@ -39,7 +39,7 @@ double-click on Suspended Sentence to run it.
 Source:
 
 If you have obtained the source directly, you need to install the
-dependencies listed further down. Then run "python run_game.py".
+dependencies listed further down. Then run `python run_game.py`.
 
 HOW TO PLAY THE GAME
 ====================
@@ -54,10 +54,10 @@ You will need to install these before running the game:
 
   Python:                   http://www.python.org/
   PyGame:                   http://www.pygame.org/
-  Albow:                    http://www.cosc.canterbury.ac.nz/greg.ewing/python/Albow/
+  pyntnclick                https://github.com/CTPUG/pyntnclick
 
 Suspended Sentence requires python 2.5 or later, pygame 1.8 or later and
-Albow 2.1.0.
+pyntnclick.
 
 LICENSE
 =======
