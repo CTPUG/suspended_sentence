@@ -49,7 +49,8 @@ class Cryo(Scene):
 
         # Flavour items
         # pipes
-        self.add_thing(GenericDescThing('cryo.pipes', 1,
+        self.add_thing(GenericDescThing(
+            'cryo.pipes', 1,
             _("These pipes carry cooling fluid to the cryo units."),
             (
                 (552, 145, 129, 66),
@@ -60,7 +61,8 @@ class Cryo(Scene):
         self.add_thing(UncuttableCryoPipes())
 
         # cryo units
-        self.add_thing(GenericCryoUnit(2,
+        self.add_thing(GenericCryoUnit(
+            2,
             _("An empty cryo chamber."),
             _("Prisoner 81E4-C8900480E635. Embezzlement. 20 years."),
             (
@@ -70,7 +72,8 @@ class Cryo(Scene):
                 (55, 490, 60, 55),
                 )))
 
-        self.add_thing(GenericCryoUnit(3,
+        self.add_thing(GenericCryoUnit(
+            3,
             _("A working cryo chamber. The frosted glass obscures the details"
               " of the occupant."),
             _("Prisoner 9334-CE1EB0243BAB. Murder. 40 years."),
@@ -81,7 +84,8 @@ class Cryo(Scene):
                 (125, 505, 80, 40),
                 )))
 
-        self.add_thing(GenericCryoUnit(4,
+        self.add_thing(GenericCryoUnit(
+            4,
             _("A broken cryo chamber. The skeleton inside has been picked"
               " clean."),
             _("Prisoner BFBC-8BF4C6B7492B. Importing illegal alien biomatter."
@@ -92,7 +96,8 @@ class Cryo(Scene):
                 (235, 490, 50, 60),
                 )))
 
-        self.add_thing(GenericCryoUnit(5,
+        self.add_thing(GenericCryoUnit(
+            5,
             _("A working cryo chamber. The frosted glass obscures the details "
               "of the occupant."),
             _("Prisoner B520-99495B8C41CE. Copyright infringement. 60 years."),
@@ -101,7 +106,8 @@ class Cryo(Scene):
                 (330, 500, 60, 50),
                 )))
 
-        self.add_thing(GenericCryoUnit(6,
+        self.add_thing(GenericCryoUnit(
+            6,
             _("An empty cryo unit. Recently filled by you."),
             _("Prisoner %s. Safecracking, grand larceny. 30 years.")
             % PLAYER_ID,
@@ -110,7 +116,8 @@ class Cryo(Scene):
                 (404, 455, 69, 120),
                 )))
 
-        self.add_thing(GenericCryoUnit(7,
+        self.add_thing(GenericCryoUnit(
+            7,
             _("An empty cryo unit."),
             _("Prisoner 83F1-CE32D3234749. Spamming. 5 years."),
             (
@@ -119,7 +126,8 @@ class Cryo(Scene):
                 (517, 487, 42, 93),
                 )))
 
-        self.add_thing(GenericCryoUnit(8,
+        self.add_thing(GenericCryoUnit(
+            8,
             _("An empty cryo unit."),
             _("Prisoner A455-9DF9F43C43E5. Medical malpractice. 10 years."),
             (
@@ -312,8 +320,8 @@ class GenericCryoUnit(GenericDescThing):
     "Generic Cryo unit"
 
     def __init__(self, number, description, detailed_description, areas):
-        super(GenericCryoUnit, self).__init__('cryo.unit', number,
-                description, areas)
+        super(GenericCryoUnit, self).__init__(
+            'cryo.unit', number, description, areas)
         self.detailed_description = detailed_description
 
     def is_interactive(self, tool=None):
@@ -407,8 +415,8 @@ class CryoComputer(Thing):
     NAME = "cryo.computer"
 
     INTERACTS = {
-        "info": InteractAnimated(416, 290, ["comp_info.png", "comp_info2.png"],
-            10),
+        "info": InteractAnimated(
+            416, 290, ["comp_info.png", "comp_info2.png"], 10),
         "warn": InteractImage(416, 290, "comp_warn.png"),
         "error": InteractImage(416, 290, "comp_error.png"),
         }
@@ -514,21 +522,27 @@ class CryoCompDetail(Scene):
         font = 'DejaVuSans-Bold.ttf'
         size = 18
 
-        background.blit(render_text(_("Info"),
+        background.blit(render_text(
+            _("Info"),
             font, 24, fg, bg, self.resource, (90, 25), False), (25, 60))
-        background.blit(render_text(_("Cryo Units Online: 2, 4"),
+        background.blit(render_text(
+            _("Cryo Units Online: 2, 4"),
             font, size, fg, bg, self.resource, (240, 30), False), (15, 120))
-        background.blit(render_text(_("Crew Active: 0"),
+        background.blit(render_text(
+            _("Crew Active: 0"),
             font, size, fg, bg, self.resource, (240, 30), False), (15, 170))
-        background.blit(render_text(_("Current Trip Time: 97558 days"),
+        background.blit(render_text(
+            _("Current Trip Time: 97558 days"),
             font, size, fg, bg, self.resource, (340, 30), False), (15, 210))
-        background.blit(render_text(_("Expected Time of Arrival:"),
+        background.blit(render_text(
+            _("Expected Time of Arrival:"),
             font, size, fg, bg, self.resource, (340, 30), False), (15, 240))
 
         self._background_fixed = background.copy()
         self._background_offline = background.copy()
 
-        self._background_fixed.blit(render_text(_("397 days"),
+        self._background_fixed.blit(render_text(
+            _("397 days"),
             font, size, fg, bg, self.resource, (340, 30), False), (275, 240))
 
         self._background_offline.blit(render_text(

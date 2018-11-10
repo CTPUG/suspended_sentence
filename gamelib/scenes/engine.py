@@ -38,14 +38,16 @@ class Engine(Scene):
         self.add_thing(CrackedPipe())
         self.add_thing(ComputerConsole())
         self.add_thing(ToMap())
-        self.add_thing(GenericDescThing('engine.body', 1,
+        self.add_thing(GenericDescThing(
+            'engine.body', 1,
             _("Dead. Those cans must have been past their sell-by date."),
             (
                 (594, 387, 45, 109),
                 (549, 479, 60, 55),
             )
         ))
-        self.add_thing(GenericDescThing('engine.superconductors', 4,
+        self.add_thing(GenericDescThing(
+            'engine.superconductors', 4,
             _("Superconductors. The engines must be power hogs."),
             (
                 (679, 246, 50, 56),
@@ -53,7 +55,8 @@ class Engine(Scene):
                 (381, 224, 25, 22),
             )
         ))
-        self.add_thing(GenericDescThing('engine.floor_hole', 5,
+        self.add_thing(GenericDescThing(
+            'engine.floor_hole', 5,
             _("A gaping hole in the floor of the room. "
               "It is clearly irreparable."),
             (
@@ -63,7 +66,8 @@ class Engine(Scene):
                 (239, 547, 123, 39),
             )
         ))
-        self.add_thing(GenericDescThing('engine.empty_cans', 7,
+        self.add_thing(GenericDescThing(
+            'engine.empty_cans', 7,
             _("Empty chocolate-covered bacon cans? Poor guy, he must have"
               " found them irresistible."),
             (
@@ -71,20 +75,23 @@ class Engine(Scene):
             )
         ))
         if not self.get_data('engine online'):
-            self.add_thing(GenericDescThing('engine.engines', 8,
+            self.add_thing(GenericDescThing(
+                'engine.engines', 8,
                 _("The engines. They don't look like they are working."),
                 (
                     (342, 261, 109, 81),
                 )
             ))
-        self.add_thing(GenericDescThing('engine.laser_cutter', 9,
+        self.add_thing(GenericDescThing(
+            'engine.laser_cutter', 9,
             _("A burned-out laser cutter. It may be responsible for the"
               " hole in the floor."),
             (
                 (120, 466, 115, 67),
             )
         ))
-        self.add_thing(GenericDescThing('engine.fuel_lines', 10,
+        self.add_thing(GenericDescThing(
+            'engine.fuel_lines', 10,
             _("The main fuel line for the engines."),
             (
                 (220, 49, 59, 75),
@@ -104,20 +111,23 @@ class Engine(Scene):
                 (435, 225, 18, 15),
             )
         ))
-        self.add_thing(GenericDescThing('engine.spare_fuel_line', 11,
+        self.add_thing(GenericDescThing(
+            'engine.spare_fuel_line', 11,
             _("The spare fuel line. If something went wrong with the main"
               " one, you would hook that one up."),
             (
                 (512, 49, 68, 44),
             )
         ))
-        self.add_thing(GenericDescThing('engine.danger_area', 12,
+        self.add_thing(GenericDescThing(
+            'engine.danger_area', 12,
             _("The sign says DANGER. You would be wise to listen to it."),
             (
                 (293, 343, 211, 46),
             )
         ))
-        self.add_thing(GenericDescThing('engine.exit_sign', 13,
+        self.add_thing(GenericDescThing(
+            'engine.exit_sign', 13,
             _("It's one of those glow-in-the-dark signs needed to satisfy the "
               "health and safety inspectors."),
             (
@@ -467,7 +477,8 @@ class Stars(Thing):
     NAME = 'engine.stars'
 
     INTERACTS = {
-        'stars': InteractAnimated(287, 455,
+        'stars': InteractAnimated(
+            287, 455,
             make_reversible_list(['stars_%d.png' % (i + 1) for i in range(5)]),
             30,
         ),
@@ -557,12 +568,13 @@ class EngineCompDetail(Scene):
 
     def setup(self):
         self._alert_messages = {}
-        self._alert_header = render_text(_("Alerts"), 'DejaVuSans.ttf',
-                27, 'darkred', (0, 0, 0, 0), self.resource, (120, 33), False)
+        self._alert_header = render_text(
+            _("Alerts"), 'DejaVuSans.ttf',
+            27, 'darkred', (0, 0, 0, 0), self.resource, (120, 33), False)
         for key, msg in self.ALERTS.items():
-            self._alert_messages[key] = render_text(msg, 'DejaVuSans-Bold.ttf',
-                    30, 'darkred', (0, 0, 0, 0), self.resource, (480, 33),
-                    False)
+            self._alert_messages[key] = render_text(
+                msg, 'DejaVuSans-Bold.ttf',
+                30, 'darkred', (0, 0, 0, 0), self.resource, (480, 33), False)
 
     def _draw_alerts(self, surface):
         xpos, ypos = self.ALERT_OFFSET

@@ -9,8 +9,8 @@
 
 from pyntnclick.i18n import _
 from pyntnclick.state import Scene, Thing, Result
-from pyntnclick.scenewidgets import (InteractRectUnion, InteractUnion,
-        InteractText, InteractNoImage)
+from pyntnclick.scenewidgets import (
+    InteractRectUnion, InteractUnion, InteractText, InteractNoImage)
 
 from gamelib.scenes.game_constants import PLAYER_ID
 from gamelib.scenes.game_widgets import make_jim_dialog, make_sentence_dialog
@@ -45,11 +45,13 @@ class Map(Scene):
                 self.game)
             if ai1:
                 self.state.increase_sentence(3)
-                return ai1, make_jim_dialog(_("Prisoner %s, you are a "
-                "class 1 felon. Obtaining access to the ship's schematics "
-                "constitutes a level 2 offence and carries a minimal penalty "
-                "of an additional 3 years on your sentence.") % PLAYER_ID,
-                self.game), make_sentence_dialog(PLAYER_ID, self.game)
+                return ai1, make_jim_dialog(
+                    _("Prisoner %s, you are a "
+                      "class 1 felon. Obtaining access to the ship's "
+                      "schematics constitutes a level 2 offence and carries a "
+                      "minimal penalty of an additional 3 years on your "
+                      "sentence.") % PLAYER_ID,
+                    self.game), make_sentence_dialog(PLAYER_ID, self.game)
 
 
 class DoorThing(Thing):
@@ -72,7 +74,8 @@ class ToCryo(DoorThing):
     INTERACTS = {
         'door': InteractUnion((
             InteractNoImage(515, 158, 56, 68),
-            InteractText(361, 512, 245, 33, _("Prisoner cryo chambers"),
+            InteractText(
+                361, 512, 245, 33, _("Prisoner cryo chambers"),
                 'white', 20, 'Monospace.ttf'),
         ))
     }
@@ -89,7 +92,8 @@ class ToBridge(DoorThing):
     INTERACTS = {
         'door': InteractUnion((
             InteractNoImage(36, 260, 60, 83),
-            InteractText(26, 170, 71, 33, _("Bridge"), 'white', 20,
+            InteractText(
+                26, 170, 71, 33, _("Bridge"), 'white', 20,
                 'Monospace.ttf'),
         ))
     }
@@ -106,7 +110,8 @@ class ToMess(DoorThing):
     INTERACTS = {
         'door': InteractUnion((
             InteractNoImage(395, 262, 64, 80),
-            InteractText(341, 430, 110, 33, _("Mess hall"), 'white', 20,
+            InteractText(
+                341, 430, 110, 33, _("Mess hall"), 'white', 20,
                 'Monospace.ttf'),
         ))
     }
@@ -123,7 +128,8 @@ class ToEngine(DoorThing):
     INTERACTS = {
         'door': InteractUnion((
             InteractNoImage(691, 279, 76, 54),
-            InteractText(662, 496, 128, 33, _("Engine room"), 'white', 20,
+            InteractText(
+                662, 496, 128, 33, _("Engine room"), 'white', 20,
                 'Monospace.ttf'),
         ))
     }
@@ -132,9 +138,10 @@ class ToEngine(DoorThing):
 
     def interact(self, item):
         if not self.game.is_in_inventory('helmet:'):
-            return Result(_('The airlock refuses to open. The automated'
-                    ' voice says: "Hull breach beyond this door. Personnel'
-                    ' must be equipped for vacuum before entry."'))
+            return Result(
+                _('The airlock refuses to open. The automated'
+                  ' voice says: "Hull breach beyond this door. Personnel'
+                  ' must be equipped for vacuum before entry."'))
         else:
             return super(ToEngine, self).interact(item)
 
@@ -148,7 +155,8 @@ class ToMachine(DoorThing):
     INTERACTS = {
         'door': InteractUnion((
             InteractNoImage(608, 156, 57, 72),
-            InteractText(578, 83, 140, 33, _("Machine room"), 'white', 20,
+            InteractText(
+                578, 83, 140, 33, _("Machine room"), 'white', 20,
                 'Monospace.ttf'),
         ))
     }
@@ -165,7 +173,8 @@ class ToCrew(DoorThing):
     INTERACTS = {
         'door': InteractUnion((
             InteractNoImage(210, 321, 37, 64),
-            InteractText(69, 460, 160, 33, _("Crew quarters"), 'white', 20,
+            InteractText(
+                69, 460, 160, 33, _("Crew quarters"), 'white', 20,
                 'Monospace.ttf'),
         ))
     }
@@ -200,7 +209,8 @@ class HydroponicsArea(Thing):
     INTERACTS = {
         'areas': InteractUnion((
             InteractNoImage(314, 263, 73, 81),
-            InteractText(313, 132, 140, 33, _("Hydroponics"), 'white', 20,
+            InteractText(
+                313, 132, 140, 33, _("Hydroponics"), 'white', 20,
                 'Monospace.ttf'),
         ))
     }
