@@ -42,7 +42,7 @@ def make_jim_dialog(mesg, game):
 def make_sentence_dialog(prisoner, game):
     return make_jim_dialog(
             _("Prisoner %(id)s, your total sentence is now %(sen)d years.") % {
-                "id": prisoner, 'sen': game.data.get_total_sentence()}, game) 
+                "id": prisoner, 'sen': game.data.get_total_sentence()}, game)
 
 
 class BaseCamera(Thing):

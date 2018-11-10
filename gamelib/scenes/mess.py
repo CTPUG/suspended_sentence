@@ -5,9 +5,9 @@ from random import randint
 from pyntnclick.i18n import _
 from pyntnclick.state import Scene, Item, CloneableItem, Thing, Result
 from pyntnclick.cursor import CursorSprite
-from pyntnclick.scenewidgets import (InteractNoImage, InteractImage,
-                                  InteractImageRect, InteractAnimated,
-                                  GenericDescThing)
+from pyntnclick.scenewidgets import (
+    InteractNoImage, InteractImage, InteractImageRect, InteractAnimated,
+    GenericDescThing)
 
 from gamelib.scenes.game_constants import PLAYER_ID
 from gamelib.scenes.game_widgets import Door
@@ -34,13 +34,15 @@ class Mess(Scene):
         self.add_item_factory(DentedCan)
         # Flavour items
         # extra cans on shelf
-        self.add_thing(GenericDescThing('mess.cans', 1,
+        self.add_thing(GenericDescThing(
+            'mess.cans', 1,
             _("A large collection of rusted, useless cans."),
             (
                 (154, 335, 89, 106),
                 (152, 435, 63, 66),
                 )))
-        self.add_thing(GenericDescThing('mess.broccoli', 2,
+        self.add_thing(GenericDescThing(
+            'mess.broccoli', 2,
             _("An impressively overgrown broccoli."),
             (
                 (503, 89, 245, 282),

@@ -8,8 +8,8 @@ from pyntnclick.scenewidgets import (
     TakeableThing)
 
 from gamelib.scenes.game_constants import PLAYER_ID
-from gamelib.scenes.game_widgets import (Door, BaseCamera, make_jim_dialog,
-        make_sentence_dialog)
+from gamelib.scenes.game_widgets import (
+    Door, BaseCamera, make_jim_dialog, make_sentence_dialog)
 
 
 class CrewQuarters(Scene):
@@ -29,10 +29,12 @@ class CrewQuarters(Scene):
         self.add_item_factory(FishbowlHelmet)
         self.add_thing(PosterThing())
         self.add_thing(MonitorCamera())
-        self.add_thing(GenericDescThing('crew.plant', 1,
+        self.add_thing(GenericDescThing(
+            'crew.plant', 1,
             _("The plant is doing surprisingly well for centuries of neglect"),
             ((624, 215, 61, 108),)))
-        self.add_thing(GenericDescThing('crew.cat', 2,
+        self.add_thing(GenericDescThing(
+            'crew.cat', 2,
             _("A picture of a cat labelled 'Clementine'"),
             ((722, 382, 66, 72),)))
 

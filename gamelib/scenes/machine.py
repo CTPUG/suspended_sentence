@@ -28,7 +28,8 @@ class Machine(Scene):
         self.add_item_factory(CryoPipesTwo)
         self.add_item_factory(CryoPipesThree)
         self.add_item_factory(Manual)
-        self.add_thing(GenericDescThing('machine.wires', 2,
+        self.add_thing(GenericDescThing(
+            'machine.wires', 2,
             _("Wires run to all the machines in the room"),
             (
                 (250, 172, 252, 12),
@@ -48,16 +49,20 @@ class Machine(Scene):
                 (648, 85, 22, 26),
                 (674, 54, 23, 36),
                 )))
-        self.add_thing(GenericDescThing('machine.diagram', 3,
+        self.add_thing(GenericDescThing(
+            'machine.diagram', 3,
             _("A wiring diagram of some sort"),
             ((694, 140, 94, 185),)))
-        self.add_thing(GenericDescThing('machine.powerpoint', 4,
+        self.add_thing(GenericDescThing(
+            'machine.powerpoint', 4,
             _("The cables to this power point have been cut"),
             ((155, 22, 92, 74),)))
-        self.add_thing(GenericDescThing("machine.powerpoint", 5,
+        self.add_thing(GenericDescThing(
+            "machine.powerpoint", 5,
             _("All the machines run off this powerpoint"),
             ((593, 19, 74, 57),)))
-        self.add_thing(GenericDescThing("machine.drill_press", 6,
+        self.add_thing(GenericDescThing(
+            "machine.drill_press", 6,
             _("An impressive looking laser drill press"),
             (
                 (519, 338, 36, 63),
@@ -70,7 +75,8 @@ class Machine(Scene):
                 (532, 331, 14, 11),
                 (605, 304, 26, 8),
             )))
-        self.add_thing(GenericDescThing("machine.drill_press_block", 7,
+        self.add_thing(GenericDescThing(
+            "machine.drill_press_block", 7,
             _("The block for the laser drill press"),
             ((461, 446, 38, 27),)))
 
@@ -183,14 +189,14 @@ class LaserWelderButton(Thing):
             welder_slot.set_data("contents", [])
             welder_slot.set_interact()
             if self.game.is_in_inventory("cryo_pipes_one:"):
-                self.game.replace_inventory_item("cryo_pipes_one:",
-                                                  "cryo_pipes_two")
+                self.game.replace_inventory_item(
+                    "cryo_pipes_one:", "cryo_pipes_two")
                 return Result(_("With high-precision spitzensparken, you weld"
                                 " together a second pipe. You bundle the two"
                                 " pipes together."), soundfile='laser.ogg')
             elif self.game.is_in_inventory("cryo_pipes_two:"):
-                self.game.replace_inventory_item("cryo_pipes_two:",
-                                                  "cryo_pipes_three")
+                self.game.replace_inventory_item(
+                    "cryo_pipes_two:", "cryo_pipes_three")
                 return Result(_("With high-precision spitzensparken, you"
                                 " create yet another pipe. You store it with"
                                 " the other two."), soundfile='laser.ogg')
