@@ -2,7 +2,6 @@
 
 import random
 
-from pygame.color import Color
 from pygame.rect import Rect
 
 from pyntnclick.i18n import _
@@ -56,23 +55,26 @@ class Bridge(Scene):
         self.add_thing(RightLights())
         self.add_thing(JimPanel())
         self.add_thing(StarField())
-        self.add_thing(GenericDescThing('bridge.wires', 1,
+        self.add_thing(GenericDescThing(
+            'bridge.wires', 1,
             _("The brightly coloured wires contrast with the drab walls."),
             ((46, 4, 711, 143),)))
-        self.add_thing(GenericDescThing('bridge.note', 2,
+        self.add_thing(GenericDescThing(
+            'bridge.note', 2,
             _("\"Dammit JIM, I'm a doctor, not an engineer!\""),
             (
                 (491, 494, 194, 105),
                 (422, 533, 71, 66),
-                )))
-        self.doctor = GenericDescThing('bridge.skel', 3,
-                _("A skeleton hangs improbably from the wires."),
-                (
-                    (632, 148, 40, 29),
-                    (683, 176, 30, 101),
-                    (652, 274, 45, 96),
-                    (639, 180, 11, 95),
-                    ))
+            )))
+        self.doctor = GenericDescThing(
+            'bridge.skel', 3,
+            _("A skeleton hangs improbably from the wires."),
+            (
+                (632, 148, 40, 29),
+                (683, 176, 30, 101),
+                (652, 274, 45, 96),
+                (639, 180, 11, 95),
+            ))
         self.add_thing(self.doctor)
 
     def enter(self):
@@ -242,10 +244,11 @@ class SuperconductorThing(TakeableThing):
                           .set_data('contains_superconductor', False)
         self.take()
         return (Result(_("The superconductor module unclips easily.")),
-                make_jim_dialog(_("Prisoner %s. That chair you've destroyed"
-                                  " was property of the ship's captain. "
-                                  "You will surely be punished.")
-                                  % PLAYER_ID, self.game))
+                make_jim_dialog(
+                    _("Prisoner %s. That chair you've destroyed"
+                      " was property of the ship's captain. "
+                      "You will surely be punished.")
+                    % PLAYER_ID, self.game))
 
 
 class StarField(Thing):
@@ -253,14 +256,13 @@ class StarField(Thing):
     NAME = 'bridge.stars'
 
     INTERACTS = {
-            #'stars' : InteractImage(190, 145, 'stars_3.png'),
-            'stars': InteractAnimated(190, 145,
-                                      make_reversible_list(
-                                          ['stars_%d.png' % (i + 1) for i
-                                           in range(3)]
-                                      ),
-                                      30),
-            }
+        'stars': InteractAnimated(190, 145,
+                                  make_reversible_list(
+                                      ['stars_%d.png' % (i + 1) for i
+                                       in range(3)]
+                                  ),
+                                  30),
+    }
 
     INITIAL = 'stars'
 
@@ -395,9 +397,10 @@ class LogTab(Thing):
     NAME = 'bridge_comp.screen'
 
     INTERACTS = {
-            'log tab': InteractText(100, 53, 94, 37,  _("Logs"),
-                'lightgreen', 20, 'DejaVuSans-Bold.ttf', True),
-            }
+        'log tab': InteractText(
+            100, 53, 94, 37,  _("Logs"),
+            'lightgreen', 20, 'DejaVuSans-Bold.ttf', True),
+    }
     INITIAL = 'log tab'
     COMPUTER = 'bridge_comp_detail'
 
@@ -416,9 +419,10 @@ class AlertTab(Thing):
     NAME = 'bridge_comp.alert_tab'
 
     INTERACTS = {
-            'alert tab': InteractText(12, 53, 88, 37, _("Alerts"),
-                'orange', 20, 'DejaVuSans-Bold.ttf', True),
-            }
+        'alert tab': InteractText(
+            12, 53, 88, 37, _("Alerts"),
+            'orange', 20, 'DejaVuSans-Bold.ttf', True),
+    }
     INITIAL = 'alert tab'
     COMPUTER = 'bridge_comp_detail'
 
@@ -438,9 +442,10 @@ class NavTab(Thing):
     NAME = 'bridge_comp.nav_tab'
 
     INTERACTS = {
-            'nav tab': InteractText(197, 53, 126, 37, _("Navigation"),
-                'darkblue', 20, 'DejaVuSans-Bold.ttf', True),
-            }
+        'nav tab': InteractText(
+            197, 53, 126, 37, _("Navigation"),
+            'darkblue', 20, 'DejaVuSans-Bold.ttf', True),
+    }
     INITIAL = 'nav tab'
     COMPUTER = 'bridge_comp_detail'
 
@@ -467,8 +472,9 @@ class DestNavPageLine(Thing):
         r = Rect(rect)
         # We dynamically generate the interact rect here.
         self.interacts = {}
-        self.interacts['line'] = InteractText(r.x, r.y, r.w, r.h,
-                dest, 'darkblue', 16, 'DejaVuSans-Bold.ttf', False)
+        self.interacts['line'] = InteractText(
+            r.x, r.y, r.w, r.h,
+            dest, 'darkblue', 16, 'DejaVuSans-Bold.ttf', False)
         # Whether JIM blocks this
         self.ai_blocked = ai_blocked
         self.set_interact()
@@ -559,14 +565,14 @@ class BridgeCompDetail(Scene):
 
     ALERT_BASE = 'comp_alert_base.png'
     ALERTS = {
-            'hull breach': _("Hull breach detected: Engine Room"),
-            'ai looping': _("AI Status: 3D scene reconstruction failed."
-                " Recovery in progress"),
-            'ai offline': _("AI System Offline"),
-            'engine offline': _("Engine Offline"),
-            'life support': _("Life Support System: 20% operational"),
-            'life support partial': _("Life Support System: 40% operational"),
-            }
+        'hull breach': _("Hull breach detected: Engine Room"),
+        'ai looping': _("AI Status: 3D scene reconstruction failed."
+                        " Recovery in progress"),
+        'ai offline': _("AI System Offline"),
+        'engine offline': _("Engine Offline"),
+        'life support': _("Life Support System: 20% operational"),
+        'life support partial': _("Life Support System: 40% operational"),
+    }
 
     # Point to start drawing changeable alerts
     ALERT_OFFSET = (16, 100)
@@ -579,15 +585,15 @@ class BridgeCompDetail(Scene):
     NAVIGATION = 'bridge_nav_base.png'
 
     NAV_MESSAGES = {
-            'engine offline': [
-                _("Engine Offline: Navigation Disabled")],
-            'life support': [
+        'engine offline': [
+            _("Engine Offline: Navigation Disabled")],
+        'life support': [
             _("Life Support Marginal."),
             _("Emergency Navigation Protocol Engaged."),
             '',
             _("Destination locked to:"),
             _("Bounty Penal Colony Space Port, New South Australia")],
-            }
+    }
 
     BACKGROUND = ALERT_BASE
 
@@ -601,36 +607,45 @@ class BridgeCompDetail(Scene):
         self.add_thing(LogTab())
         self.add_thing(AlertTab())
         self.add_thing(NavTab())
-        #self.add_thing(CompUpButton())
-        #self.add_thing(CompDownButton())
+        #  Navigation buttons were implemented but then later abandoned
+        #  because we couldn't think of funny enough logs. :)
+        #  self.add_thing(CompUpButton())
+        #  self.add_thing(CompDownButton())
         self._scene_playlist = None
         self._alert = self.get_image(self.FOLDER, self.ALERT_BASE)
         self._alert_messages = {}
         self._nav_messages = {}
         for key, text in self.ALERTS.items():
-            self._alert_messages[key] = render_text(text,
-                    'DejaVuSans-Bold.ttf', 18, 'orange', (0, 0, 0, 0),
-                    self.resource, (600, 25), False)
+            self._alert_messages[key] = render_text(
+                text, 'DejaVuSans-Bold.ttf', 18, 'orange', (0, 0, 0, 0),
+                self.resource, (600, 25), False)
         self._nav_background = self.get_image(self.FOLDER, self.NAVIGATION)
-        #for key, name in self.NAVIGATION.items():
-        #    self._nav_messages[key] = self.get_image(self.FOLDER, name)
+        #  See note above about funny navigation logs
+        #  for key, name in self.NAVIGATION.items():
+        #      self._nav_messages[key] = self.get_image(self.FOLDER, name)
         self._nav_lines = []
-        self._nav_lines.append(DestNavPageLine(1, (12, 99, 610, 25), False,
+        self._nav_lines.append(DestNavPageLine(
+            1, (12, 99, 610, 25), False,
             _("1. Bounty Penal Colony Space Port, New South Australia"
-                " (397 days)")))
-        self._nav_lines.append(DestNavPageLine(2, (12, 135, 610, 25), True,
+              " (397 days)")))
+        self._nav_lines.append(DestNavPageLine(
+            2, (12, 135, 610, 25), True,
             _("2. Hedonia Space Station (782 days)")))
-        self._nav_lines.append(DestNavPageLine(3, (12, 167, 610, 25), True,
+        self._nav_lines.append(DestNavPageLine(
+            3, (12, 167, 610, 25), True,
             _("3. Spinosa Health Resort, Prunus Secundus (1231 days)")))
-        self._nav_lines.append(DestNavPageLine(4, (12, 203, 610, 25), True,
+        self._nav_lines.append(DestNavPageLine(
+            4, (12, 203, 610, 25), True,
             _("4. Achene Space Port, Indica Prspinosame (1621 days)")))
-        self._nav_lines.append(DestNavPageLine(5, (12, 239, 610, 25), True,
+        self._nav_lines.append(DestNavPageLine(
+            5, (12, 239, 610, 25), True,
             _("5. Opioid Space Port, Gelatinosa Prime (1963 days)")))
         self._log_background = self.get_image(self.FOLDER, self.LOG_BACKGROUND)
         self._logs = []
         for text in self.LOGS:
             log_page = self._log_background.copy()
-            log_page.blit(render_text(text, 'DejaVuSans-Bold.ttf', 18,
+            log_page.blit(render_text(
+                text, 'DejaVuSans-Bold.ttf', 18,
                 'lightgreen', (0, 0, 0, 0), self.resource, (600, 25), False),
                 self.ALERT_OFFSET)
             self._logs.append(log_page)
@@ -666,8 +681,9 @@ class BridgeCompDetail(Scene):
         surface = self._nav_background.copy()
         xpos, ypos = self.ALERT_OFFSET
         for line in self.NAV_MESSAGES[key]:
-            text = render_text(line, 'DejaVuSans-Bold.ttf', 18,
-                    'darkblue', (0, 0, 0, 0), self.resource, (600, 25), False)
+            text = render_text(
+                line, 'DejaVuSans-Bold.ttf', 18,
+                'darkblue', (0, 0, 0, 0), self.resource, (600, 25), False)
             surface.blit(text, (xpos, ypos))
             ypos = ypos + text.get_height() + self.ALERT_SPACING
         return surface
@@ -686,35 +702,36 @@ class BridgeCompDetail(Scene):
 
     def _draw_alerts(self):
         xpos, ypos = self.ALERT_OFFSET
-        self._background.blit(self._alert_messages['hull breach'],
-                (xpos, ypos))
-        ypos += (self._alert_messages['hull breach'].get_size()[1]
-                + self.ALERT_SPACING)
+        self._background.blit(
+            self._alert_messages['hull breach'], (xpos, ypos))
+        ypos += (
+            self._alert_messages['hull breach'].get_size()[1]
+            + self.ALERT_SPACING)
         if self.game.scenes['bridge'].get_data('ai status') == 'looping':
-            self._background.blit(self._alert_messages['ai looping'],
-                    (xpos, ypos))
+            self._background.blit(
+                self._alert_messages['ai looping'], (xpos, ypos))
             ypos += (self._alert_messages['ai looping'].get_size()[1]
                      + self.ALERT_SPACING)
         if self.game.scenes['bridge'].get_data('ai status') == 'dead':
-            self._background.blit(self._alert_messages['ai offline'],
-                    (xpos, ypos))
+            self._background.blit(
+                self._alert_messages['ai offline'], (xpos, ypos))
             ypos += (self._alert_messages['ai offline'].get_size()[1]
                      + self.ALERT_SPACING)
         if not self.game.scenes['engine'].get_data('engine online'):
-            self._background.blit(self._alert_messages['engine offline'],
-                    (xpos, ypos))
+            self._background.blit(
+                self._alert_messages['engine offline'], (xpos, ypos))
             ypos += (self._alert_messages['engine offline'].get_size()[1]
                      + self.ALERT_SPACING)
         if (self.game.scenes['mess'].get_data('life support status')
                 == 'broken'):
-            self._background.blit(self._alert_messages['life support'],
-                    (xpos, ypos))
+            self._background.blit(
+                self._alert_messages['life support'], (xpos, ypos))
             ypos += (self._alert_messages['life support'].get_size()[1]
                      + self.ALERT_SPACING)
         if (self.game.scenes['mess'].get_data('life support status')
                 == 'replaced'):
-            self._background.blit(self._alert_messages['life support partial'],
-                         (xpos, ypos))
+            self._background.blit(
+                self._alert_messages['life support partial'], (xpos, ypos))
             ypos += (self._alert_messages['life support partial'].get_size()[1]
                      + self.ALERT_SPACING)
 
