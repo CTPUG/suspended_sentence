@@ -22,4 +22,3 @@ class SSMenuScreen(MenuScreen):
 
     def make_save_game_button(self):
         return self.make_image_button((601, 200), 'splash/save.png')
-
