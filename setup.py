@@ -89,6 +89,6 @@ setup(
       data_files=[
           # 'COPYRIGHT',
           'COPYING',
-          'README.txt',
+          'README.md',
       ],
      )
