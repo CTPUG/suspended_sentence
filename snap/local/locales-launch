@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# Launcher for generating the required locale data for gettext internationalization(I18N) support
+# Refer to: locale(7), localedef(1), The GNU C Library Manual - Locales and Internationalization, The GNU C Library Manual - Installing the GNU C Library - Installing the C Library
+# This launcher is based on Sebastien Bacher's comment in the following topic:
+#   Lack of compiled locales breaks gettext based localisation - snapcraft - snapcraft.io
+#   https://forum.snapcraft.io/t/lack-of-compiled-locales-breaks-gettext-based-localisation/3758/3
+# 林博仁(Buo-ren, Lin) © 2018
+
+set \
+	-o errexit \
+	-o errtrace \
+	-o nounset \
+	-o pipefail
+
+export LOCPATH="${SNAP}"/usr/lib/locale
+
+if ! [ -d "${LOCPATH}"/en_US.utf8 ]; then
+	# locales-all package isn't staged, locale data needs to be generated manually
+	export I18NPATH="${SNAP}"/usr/share/i18n
+	LOCPATH="${SNAP_USER_COMMON}"/.local/lib/locale
+	if [ ! -d "${LOCPATH}" ]; then
+		mkdir \
+			--parents \
+			"${LOCPATH}"
+	fi
+
+	declare locale; for locale_variable_name in \
+		LANG \
+		LC_CTYPE \
+		LC_NUMERIC \
+		LC_TIME \
+		LC_COLLATE \
+		LC_MONETARY \
+		LC_MESSAGES \
+		LC_PAPER \
+		LC_NAME \
+		LC_ADDRESS \
+		LC_TELEPHONE \
+		LC_MEASUREMENT \
+		LC_IDENTIFICATION; do
+		declare -n locale_variable="${locale_variable_name}"
+
+		if ! test -v locale_variable \
+			|| test -z "${locale_variable}" \
+			|| test "${locale_variable}" = C.UTF-8 \
+			|| test "${locale_variable}" = C; then
+			continue
+		fi
+
+		locale="$(
+			cut \
+				--delimiter=. \
+				--fields=1 \
+				<<< "${locale_variable}"
+		)"
+
+		if [ ! -d "${LOCPATH}"/"${locale}".UTF-8 ]; then
+			printf -- \
+				'locales-launch: Data of %s locale not found, generating, please wait...\n' \
+				"${locale}" \
+				>&2
+			localedef \
+				--charmap=UTF-8 \
+				--inputfile="${locale}" \
+				"${LOCPATH}"/"${locale}".UTF-8 \
+				|| true # Don't errexit when fail (ret=1, 4)
+		fi
+
+		unset -n locale_variable
+	done; unset I18NPATH locale
+fi
+
+exec "${@}"
