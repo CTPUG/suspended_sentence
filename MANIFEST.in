@@ -1,0 +1,7 @@
+include *.md
+include COPYING
+recursive-include data *.png *.txt
+recursive-include data/fonts *.ttf *.txt
+recursive-include data/icons *.png *.ico *.icns
+recursive-include data/locale *.mo
+recursive-include data/sounds *.ogg *.txt
