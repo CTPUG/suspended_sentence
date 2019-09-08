@@ -39,6 +39,7 @@ setup(
       # Files
       packages=find_packages(),
       scripts=['run_game.py'],
+      include_package_data=True,
 
       # py2exe
       console=['scripts/testconsole.py'],
@@ -86,9 +87,4 @@ setup(
           ],
           'excludes': ['numpy'],
       }},
-      data_files=[
-          # 'COPYRIGHT',
-          'COPYING',
-          'README.md',
-      ],
      )
