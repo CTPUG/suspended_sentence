@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Suspended Sentence
+Comment=Adventure Game set on a space ship
+Icon=${SNAP}/lib/python2.7/site-packages/data/icons/suspended_sentence48x48.png
+Exec=suspended-sentence
+Terminal=false
+Type=Application
+Categories=Game;AdventureGame;

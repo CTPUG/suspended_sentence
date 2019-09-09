@@ -1,0 +1,46 @@
+name: suspended-sentence
+base: core18
+version: git
+summary: 'Suspended Sentence: Point-and-click adventure game set on a space ship'
+description: |
+ You wake up to find yourself alone on a broken spaceship headed to a Penal
+ Colony. The ship seems to want you to fix it, but first you need to get out of
+ the room.
+ It's an adventure game, you know how this works.
+ Suspended Sentence was a PyWeek.org entry, a game written in a week.
+license: MIT
+
+grade: stable
+confinement: strict
+
+parts:
+  game:
+    plugin: python
+    python-version: python2
+    source: .
+    stage-packages:
+      - libc-bin
+      - libslang2
+      - locales
+      - python-numpy
+      - python-pygame
+
+  launcher:
+    plugin: dump
+    source-type: local
+    source: snap/local
+    stage:
+      - suspended-sentence.desktop
+      - locales-launch
+
+apps:
+  suspended-sentence:
+    command: >
+      locales-launch
+      $SNAP/bin/run_game.py
+    desktop: suspended-sentence.desktop
+    environment:
+      LD_LIBRARY_PATH: "$LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio"
+    plugs:
+      - pulseaudio
+      - x11
